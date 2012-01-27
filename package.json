@@ -1,0 +1,42 @@
+{
+    "name"              : "relax-gtd",
+    "preferGlobal"      : "false",
+    "version"           : "0.0.1",
+    "author"            : "Graeme Foster <graemef@gmail.com>",
+    "description"       : "it's a Getting Things Done thing",
+    "contributors"      : [
+        {
+            "name" : "Graeme Foster",
+            "email": "graemef@gmail.com"
+        }
+    ],
+    "bin"               : {
+        "relaxgtd": "./bin/relaxgtd"
+    },
+    "scripts"           : {
+        "start": "node ./bin/relaxgtd",
+        "test" : "vows --spec --isolate"
+    },
+    "main"              : "./lib/relaxgtd",
+    "repository"        : {
+        "type": "git",
+        "url" : "https://github.com/graemef/relaxgtd.git"
+    },
+    "keywords"          : [
+        "gtd"
+    ],
+    "dependencies"      : {
+        "underscore": "1.3.x"
+    },
+    "devDependencies"   : {
+        "zombie"  : "0.12.x",
+        "vows-bdd": "0.2.x",
+        "chai"    : "0.2.x"
+    },
+    "bundleDependencies": [
+    ],
+    "license"           : "MIT",
+    "engine"            : {
+        "node": ">=0.6"
+    }
+}
