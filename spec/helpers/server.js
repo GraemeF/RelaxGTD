@@ -12,13 +12,10 @@ var Server = function () {
             end: false
         });
         self.commandProcess.on('exit', function (code, signal) {
-            //console.log('Server process terminated due to receipt of signal ' + signal);
         });
-        //console.log("Started process " + self.commandProcess.pid);
     };
 
     this.stop = function () {
-        //console.log("Killing process " + self.commandProcess.pid);
         this.commandProcess.kill();
     };
 };

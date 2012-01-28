@@ -6,7 +6,7 @@ RelaxBrowser = function (callback) {
     this.zombie = new Browser({
         runScripts: true,
         site: "http://localhost:3004",
-        debug: true,
+        debug: false,
         userAgent: "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.7 (KHTML, like Gecko) Chrome/16.0.912.59 Safari/535.7"
     });
     this.waitForServerToStart(callback);
