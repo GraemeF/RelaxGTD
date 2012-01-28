@@ -4,7 +4,8 @@ require.config({
     }
 });
 
-require(["jquery", "knockout"], function ($, ko) {
+require(["jquery", "knockout", "App", "Service"], function ($, ko, App, Service) {
     $(function () {
+        var app = new App(new Service("/"));
     });
 });
