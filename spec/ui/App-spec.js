@@ -4,8 +4,9 @@ var _ = require("underscore");
 require('chai').should();
 
 function requireWithDeps(moduleName, dependencies) {
+    var originalDefine;
     if (typeof define !== "undefined") {
-        throw new Error("define is already defined.")
+        originalDefine = define;
     }
 
     var moduleExports;
@@ -17,33 +18,28 @@ function requireWithDeps(moduleName, dependencies) {
     };
 
     require(moduleName);
+
+    define = originalDefine;
     return moduleExports;
 }
-var knockout = {
-    observableArray: sinon.stub()
-};
-knockout.observableArray.returns(function () {
-    return[];
-});
-
-var App = requireWithDeps("../../ui/scripts/App.js", {'knockout': knockout});
-
-var Service;
-define = function (dependencies, stuff) {
-    Service = stuff({});
-};
-
-require("../../ui/scripts/Service.js");
 
 vows.describe('App').addBatch({
     'when the service has no tasks': {
         topic: function () {
+            var Service = requireWithDeps("../../ui/scripts/Service.js", {'jquery': {}});
             var service = new Service("x");
             sinon.spy(service, "getTasks");
             return service;
         },
         'I create an App': {
             topic: function (service) {
+                var knockout = {
+                    observableArray: sinon.stub()
+                };
+                knockout.observableArray.returns(function () {
+                    return[];
+                });
+                var App = requireWithDeps("../../ui/scripts/App.js", {'knockout': knockout});
                 return new App(service);
             },
             'I get the tasks': {
