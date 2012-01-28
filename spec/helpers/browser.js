@@ -1,45 +1,42 @@
-var zombie = require("zombie");
+var Browser = require("zombie");
 var _ = require("underscore");
 
-var theBrowser = null;
-
-browser = function (callback) {
-    if (!(theBrowser != null)) {
-        zombie = new zombie.Browser({
-            runScripts: true,
-            site      : "http://localhost:3004",
-            debug     : true,
-            userAgent : "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.7 (KHTML, like Gecko) Chrome/16.0.912.59 Safari/535.7"
-        });
-        return zombie.visit('/', function (err, newBrowser, status) {
-            theBrowser = newBrowser;
-            return callback(err, newBrowser, status);
-        });
-    } else {
-        return callback(null, theBrowser);
-    }
+RelaxBrowser = function (callback) {
+    self = this;
+    this.zombie = new Browser({
+        runScripts: true,
+        site: "http://localhost:3004",
+        debug: true,
+        userAgent: "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.7 (KHTML, like Gecko) Chrome/16.0.912.59 Safari/535.7"
+    });
+    this.waitForServerToStart(callback);
 };
 
-module.exports = {
-    createTask: function (title, callback) {
-        console.log("Creating " + title);
-        return browser(function (err, browser) {
-            if (err) callback(err, null);
-            browser.fill('newTaskTitle', title)
-                .pressButton('Add Task', function () {
-                    browser.wait(500, callback);
-                });
+RelaxBrowser.prototype.waitForServerToStart = function (callback) {
+    var self = this;
+    setTimeout(function () {
+        self.zombie.visit('/', function (e, browser) {
+            if (browser.error)
+                self.waitForServerToStart(callback);
+            else
+                callback(e, self);
         });
-    },
-    tasks     : function () {
-        console.log("Getting tasks");
-        return browser(function (err, browser) {
-            if (err) callback(err, null);
-            var tasks = _.map(browser.queryAll('.task'), function (x) {
-                return x.textContent;
-            });
-            console.log("Tasks:", tasks);
-            return tasks;
-        });
-    }
+    }, 100);
 };
+
+RelaxBrowser.prototype.createTask = function (title, callback) {
+    var self = this;
+    this.zombie
+        .fill('newTaskTitle', title)
+        .pressButton('Add Task', function (e) {
+            callback(e, self);
+        });
+};
+
+RelaxBrowser.prototype.tasks = function () {
+    return _.map(this.zombie.queryAll('.task'), function (x) {
+        return x.textContent;
+    });
+};
+
+module.exports = RelaxBrowser;

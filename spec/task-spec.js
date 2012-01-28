@@ -8,22 +8,22 @@ var RunningServer = function () {
     return server;
 };
 
+var BrowserAtApp = function () {
+    new helpers.RelaxBrowser(this.callback);
+};
+
 vows.describe('Task').addBatch({
     'when the server is running': {
         topic: RunningServer,
-        'I browse to the app':{
-          topic:function()
-          {
-
-          }
-        },
-        'I add a task': {
-            topic: function () {
-                helpers.Task.IsCreatedWithTitle_('do something');
-                return 4;
-            },
-            'the new task is shown':function(x){
-                x.should.equal(4);
+        'I browse to the app': {
+            topic: BrowserAtApp,
+            'I add a task': {
+                topic: function (browser) {
+                    browser.createTask('do something', this.callback);
+                },
+                'the new task is shown': function (browser) {
+                    browser.tasks().should.include('do something');
+                }
             }
         },
         teardown: function (server) {
@@ -31,10 +31,3 @@ vows.describe('Task').addBatch({
         }
     }
 }).export(module);
-/*
- .scenario("Create a new task")
- .given(helpers.Server.HasBeenStarted())
- .when(helpers.Task.IsCreatedWithTitle_('do something'))
- .then(helpers.Task.Task_ShouldBeShown('do something'))
- .complete(helpers.Server.Stop)
- .finish(module);*/
