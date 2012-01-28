@@ -1,43 +1,43 @@
 {
-    "name"              : "relax-gtd",
-    "preferGlobal"      : "false",
-    "version"           : "0.0.1",
-    "author"            : "Graeme Foster <graemef@gmail.com>",
-    "description"       : "it's a Getting Things Done thing",
-    "contributors"      : [
+    "name": "relax-gtd",
+    "preferGlobal": "false",
+    "version": "0.0.1",
+    "author": "Graeme Foster <graemef@gmail.com>",
+    "description": "it's a Getting Things Done thing",
+    "contributors": [
         {
-            "name" : "Graeme Foster",
+            "name": "Graeme Foster",
             "email": "graemef@gmail.com"
         }
     ],
-    "bin"               : {
-        "relaxgtd": "./bin/relaxgtd"
+    "bin": {
+        "relaxgtd": "./lib/relaxgtd"
     },
-    "scripts"           : {
-        "start": "node ./bin/relaxgtd",
-        "test" : "vows --spec --isolate"
+    "scripts": {
+        "start": "node ./lib/relaxgtd",
+        "test": "vows --spec --isolate"
     },
-    "main"              : "./lib/relaxgtd",
-    "repository"        : {
+    "main": "./lib/relaxgtd",
+    "repository": {
         "type": "git",
-        "url" : "https://github.com/graemef/relaxgtd.git"
+        "url": "https://github.com/graemef/relaxgtd.git"
     },
-    "keywords"          : [
+    "keywords": [
         "gtd"
     ],
-    "dependencies"      : {
-        "express"   : "2.5.x",
+    "dependencies": {
+        "express": "2.5.x",
         "underscore": "1.3.x"
     },
-    "devDependencies"   : {
-        "zombie"  : "0.12.x",
-        "vows-bdd": "0.2.x",
-        "chai"    : "0.2.x"
+    "devDependencies": {
+        "zombie": "0.12.x",
+        "vows": "0.6.x",
+        "chai": "0.2.x"
     },
     "bundleDependencies": [
     ],
-    "license"           : "MIT",
-    "engine"            : {
+    "license": "MIT",
+    "engine": {
         "node": ">=0.6"
     }
 }

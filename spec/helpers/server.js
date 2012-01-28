@@ -1,33 +1,26 @@
 spawn = require('child_process').spawn;
 
-var runServer = function () {
-    var commandProcess;
-    commandProcess = spawn("node", ["lib/server"]);
-    commandProcess.stdout.pipe(process.stdout, {
-        end:false
-    });
-    commandProcess.stderr.pipe(process.stderr, {
-        end:false
-    });
-    commandProcess.on('exit', function (code, signal) {
-        console.log('Server process terminated due to receipt of signal ' + signal);
-    });
-    console.log("Started", commandProcess);
-    return commandProcess;
-};
-var serverProcess;
+var Server = function () {
+    var self = this;
 
-module.exports = {
-    HasBeenStarted:function () {
-        return [
-            "server has been started", function () {
-                serverProcess = runServer();
-                return this.callback();
-            }
-        ];
-    },
-    Stop:function () {
-        serverProcess.kill();
-        this.callback();
-    }
+    this.start = function () {
+        self.commandProcess = spawn("node", ["lib/relaxgtd"]);
+        self.commandProcess.stdout.pipe(process.stdout, {
+            end: false
+        });
+        self.commandProcess.stderr.pipe(process.stderr, {
+            end: false
+        });
+        self.commandProcess.on('exit', function (code, signal) {
+            //console.log('Server process terminated due to receipt of signal ' + signal);
+        });
+        //console.log("Started process " + self.commandProcess.pid);
+    };
+
+    this.stop = function () {
+        //console.log("Killing process " + self.commandProcess.pid);
+        this.commandProcess.kill();
+    };
 };
+
+module.exports = Server;
