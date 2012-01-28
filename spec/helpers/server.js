@@ -4,7 +4,7 @@ var Server = function () {
     var self = this;
 
     this.start = function () {
-        self.commandProcess = spawn("node", ["lib/relaxgtd"]);
+        self.commandProcess = spawn("node", ["lib/relaxgtd", "--port=3004"]);
         self.commandProcess.stdout.pipe(process.stdout, {
             end: false
         });

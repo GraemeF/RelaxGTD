@@ -14,7 +14,7 @@
         "relaxgtd": "./lib/relaxgtd"
     },
     "scripts": {
-        "start": "node ./lib/relaxgtd",
+        "start": "node ./lib/relaxgtd --port=80",
         "test": "vows --spec --isolate"
     },
     "main": "./lib/relaxgtd",
@@ -27,7 +27,8 @@
     ],
     "dependencies": {
         "express": "2.5.x",
-        "underscore": "1.3.x"
+        "underscore": "1.3.x",
+        "optimist": "0.3.x"
     },
     "devDependencies": {
         "zombie": "0.12.x",
