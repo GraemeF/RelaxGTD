@@ -1,7 +1,24 @@
 var vows = require("vows");
 var sinon = require("sinon");
+var _ = require("underscore");
 require('chai').should();
 
+function requireWithDeps(moduleName, dependencies) {
+    if (typeof define !== "undefined") {
+        throw new Error("define is already defined.")
+    }
+
+    var moduleExports;
+    define = function (deps, callback) {
+        var requestedDeps = _(deps).map(function (depName) {
+            return dependencies[depName];
+        });
+        moduleExports = callback.apply(this, requestedDeps);
+    };
+
+    require(moduleName);
+    return moduleExports;
+}
 var knockout = {
     observableArray: sinon.stub()
 };
@@ -9,13 +26,7 @@ knockout.observableArray.returns(function () {
     return[];
 });
 
-var App;
-
-define = function (dependencies, stuff) {
-    App = stuff(knockout);
-};
-
-require("../../ui/scripts/App.js");
+var App = requireWithDeps("../../ui/scripts/App.js", {'knockout': knockout});
 
 var Service;
 define = function (dependencies, stuff) {
