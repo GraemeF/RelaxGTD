@@ -4,7 +4,7 @@ define(['jquery'], function ($) {
     };
 
     Service.prototype.getTasks = function () {
-        return [];
+        throw new Error("todo");
     };
 
     return Service;
