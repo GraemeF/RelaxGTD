@@ -2,7 +2,8 @@ require.config({
     baseUrl: "scripts",
     paths: {
         "chai": "libs/chai",
-        "knockout": "libs/knockout-latest"
+        "knockout": "libs/knockout-latest",
+        "knockout-onDemand": "libs/knockout-onDemand"
     } });
 
 require(['spec/App-spec'], function (App) {

@@ -1,6 +1,7 @@
 require.config({
     paths: {
-        "knockout": "libs/knockout-latest"
+        "knockout": "libs/knockout-latest",
+        "knockout-onDemand": "libs/knockout-onDemand"
     }
 });
 

@@ -3,8 +3,8 @@ define(['jquery'], function ($) {
         this.baseUri = baseUri;
     };
 
-    Service.prototype.getTasks = function () {
-        throw new Error("todo");
+    Service.prototype.getTasks = function (callback) {
+        callback(null, {});
     };
 
     return Service;
