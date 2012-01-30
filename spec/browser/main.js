@@ -1,12 +1,13 @@
+const uiLibsPath = "../../ui/scripts/libs/";
+
 require.config({
-    baseUrl: "scripts",
     paths: {
         "chai": "libs/chai",
-        "knockout": "libs/knockout-latest",
-        "knockout-onDemand": "libs/knockout-onDemand"
+        "knockout": uiLibsPath + "knockout-latest",
+        "knockout-onDemand": uiLibsPath + "knockout-onDemand"
     } });
 
-require(['spec/App-spec'], function (App) {
+require(['App'], function (App) {
 
     var jasmineEnv = jasmine.getEnv();
     jasmineEnv.updateInterval = 1000;

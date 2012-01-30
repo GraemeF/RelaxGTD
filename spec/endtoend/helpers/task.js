@@ -1,4 +1,4 @@
-var browser = require('./browser');
+var browser = require('./browser.js');
 require('chai').should();
 
 character = {

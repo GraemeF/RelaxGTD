@@ -987,7 +987,7 @@ require.register("error.js", function(module, exports, require){
  * MIT Licensed
  */
 
-var fail = require('./chai').fail;
+var fail = require('./chai.js').fail;
 
 module.exports = AssertionError;
 
