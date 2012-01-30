@@ -2,11 +2,18 @@ define(['../../ui/scripts/App', '../../ui/scripts/Service', 'libs/chai'], functi
     var expect = chai.expect;
 
     describe('App', function () {
+        var service;
+        var serviceHasTasks = function (tasks) {
+            sinon.stub(service, "getTasks").callsArgWith(0, null, tasks);
+        };
+
+        beforeEach(function () {
+            service = new Service("some uri");
+        });
+
         describe('when the service has no tasks', function () {
-            var service;
             beforeEach(function () {
-                service = new Service("some uri");
-                sinon.stub(service, "getTasks").callsArgWith(0, null, []);
+                serviceHasTasks([]);
             });
             it('has no tasks', function () {
                 var app = new App(service);
@@ -15,11 +22,9 @@ define(['../../ui/scripts/App', '../../ui/scripts/Service', 'libs/chai'], functi
         });
 
         describe('when the service has a task', function () {
-            var service;
             var task = {title: "a task"};
             beforeEach(function () {
-                service = new Service("some uri");
-                sinon.stub(service, "getTasks").callsArgWith(0, null, [task]);
+                serviceHasTasks([task]);
             });
             it('has a task', function () {
                 var app = new App(service);
