@@ -87,12 +87,12 @@
         <div class="row">
           <div class="span7">
             <h2>Tasks</h2>
-              <form>
+              <form data-bind="submit: addTask">
                   <label for="newTaskTitle">Task</label><input name="newTaskTitle" id="newTaskTitle" />
                   <input type="submit" value="Add Task" />
               </form>
-              <ul>
-                  <li class="task">do something</li>
+              <ul data-bind="foreach: tasks">
+                  <li class="task" data-bind="text: title"></li>
               </ul>
           </div>
           <div class="span3">

@@ -7,5 +7,9 @@ define(['jquery'], function ($) {
         callback(null, {});
     };
 
+    Service.prototype.addTask = function (title) {
+
+    };
+
     return Service;
 });

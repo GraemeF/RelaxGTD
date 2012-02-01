@@ -1,8 +1,16 @@
-define(['knockout', 'knockout-onDemand'], function (ko) {
+define(['underscore', 'knockout', 'knockout-onDemand'], function (_, ko) {
 
     var App = function (service) {
         this.service = service;
-        this.tasks = ko.onDemandObservableArray(this.getTasks, this);
+        this.serviceTasks = ko.onDemandObservableArray(this.getTasks, this);
+        this.pendingTasks = ko.observableArray();
+        this.newTaskTitle = ko.observable();
+
+        this.tasks = ko.computed(function () {
+            console.log("pending: ", this.pendingTasks());
+            console.log("service: ", this.serviceTasks());
+            return _.union(this.pendingTasks(), this.serviceTasks());
+        }, this);
     };
 
     App.prototype.getTasks = function () {
@@ -11,7 +19,17 @@ define(['knockout', 'knockout-onDemand'], function (ko) {
             if (error !== null)
                 throw error;
 
-            self.tasks(data);
+            self.serviceTasks(data);
+        });
+    };
+
+    App.prototype.addTask = function () {
+        var self = this;
+        var title = this.newTaskTitle();
+        this.pendingTasks.push({title: title});
+        this.service.addTask(this.newTaskTitle(), function (error, data) {
+            if (error !== null)
+                throw error;
         });
     };
 

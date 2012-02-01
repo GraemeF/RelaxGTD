@@ -4,7 +4,8 @@ require.config({
     paths: {
         "chai": "libs/chai",
         "knockout": uiLibsPath + "knockout-latest",
-        "knockout-onDemand": uiLibsPath + "knockout-onDemand"
+        "knockout-onDemand": uiLibsPath + "knockout-onDemand",
+        "underscore": "libs/require-underscore"
     } });
 
 require(['App'], function (App) {

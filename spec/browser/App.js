@@ -3,12 +3,37 @@ define(['../../ui/scripts/App', '../../ui/scripts/Service', 'libs/chai'], functi
 
     describe('App', function () {
         var service;
+        var app;
+
         var serviceHasTasks = function (tasks) {
-            sinon.stub(service, "getTasks").callsArgWith(0, null, tasks);
+            service.getTasks.callsArgWith(0, null, tasks);
+            app.serviceTasks.refresh();
         };
 
         beforeEach(function () {
             service = new Service("some uri");
+            sinon.stub(service, "getTasks");
+            sinon.spy(service, 'addTask');
+
+            app = new App(service);
+        });
+
+        describe('when a task is added', function () {
+            beforeEach(function () {
+                serviceHasTasks([]);
+                app.newTaskTitle("new task");
+                app.addTask();
+            });
+
+            it('adds the task to the tasks', function () {
+                expect(app.tasks()).to.eql([
+                    {title: "new task"}
+                ]);
+            });
+
+            it('sends a task to the server', function () {
+                expect(service.addTask.calledWith("new task")).to.be.true;
+            });
         });
 
         describe('when the service has no tasks', function () {
@@ -16,7 +41,6 @@ define(['../../ui/scripts/App', '../../ui/scripts/Service', 'libs/chai'], functi
                 serviceHasTasks([]);
             });
             it('has no tasks', function () {
-                var app = new App(service);
                 expect(app.tasks()).to.be.empty;
             });
         });
@@ -27,7 +51,6 @@ define(['../../ui/scripts/App', '../../ui/scripts/Service', 'libs/chai'], functi
                 serviceHasTasks([task]);
             });
             it('has a task', function () {
-                var app = new App(service);
                 expect(app.tasks()).to.have.length(1);
                 expect(app.tasks()).to.include(task);
             });
