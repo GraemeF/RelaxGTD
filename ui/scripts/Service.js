@@ -4,7 +4,7 @@ define(['jquery'], function ($) {
     };
 
     Service.prototype.getTasks = function (callback) {
-        callback(null, {});
+        callback(null, []);
     };
 
     Service.prototype.addTask = function (title) {

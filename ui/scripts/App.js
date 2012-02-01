@@ -7,8 +7,6 @@ define(['underscore', 'knockout', 'knockout-onDemand'], function (_, ko) {
         this.newTaskTitle = ko.observable();
 
         this.tasks = ko.computed(function () {
-            console.log("pending: ", this.pendingTasks());
-            console.log("service: ", this.serviceTasks());
             return _.union(this.pendingTasks(), this.serviceTasks());
         }, this);
     };
@@ -27,7 +25,7 @@ define(['underscore', 'knockout', 'knockout-onDemand'], function (_, ko) {
         var self = this;
         var title = this.newTaskTitle();
         this.pendingTasks.push({title: title});
-        this.service.addTask(this.newTaskTitle(), function (error, data) {
+        this.service.addTask(title, function (error, data) {
             if (error !== null)
                 throw error;
         });

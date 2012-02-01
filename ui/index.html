@@ -88,7 +88,7 @@
           <div class="span7">
             <h2>Tasks</h2>
               <form data-bind="submit: addTask">
-                  <label for="newTaskTitle">Task</label><input name="newTaskTitle" id="newTaskTitle" />
+                  <label for="newTaskTitle">Task</label><input name="newTaskTitle" id="newTaskTitle" data-bind="value: newTaskTitle"/>
                   <input type="submit" value="Add Task" />
               </form>
               <ul data-bind="foreach: tasks">
