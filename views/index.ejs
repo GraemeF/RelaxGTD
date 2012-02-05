@@ -11,10 +11,10 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <script data-main="scripts/main" src="scripts/libs/require-jquery.js"></script>
+    <script data-main="scripts/main" src="../scripts/libs/require-jquery.js"></script>
 
     <!-- Le styles -->
-    <link href="assets/bootstrap.css" rel="stylesheet">
+    <link href="../assets/bootstrap.css" rel="stylesheet">
     <style type="text/css">
       /* Override some defaults */
       html, body {
@@ -74,6 +74,15 @@
           <ul class="nav">
             <li class="active"><a href="#">Home</a></li>
           </ul>
+            <p class="navbar-text pull-right">
+                <% if(!everyauth.loggedIn) { %>
+                    <a href='/auth/twitter' style='border: 0px'>
+                        <img style='border: 0px' src='https://si0.twimg.com/images/dev/buttons/sign-in-with-twitter-l.png'/>
+                    </a>
+                <% } else { %>
+                Logged in as <img class="icon" src='<%= everyauth.twitter.user.profile_image_url %>'/> <a href='#'><%= everyauth.twitter.user.screen_name %></a>
+                <% } %>
+            </p>
         </div>
       </div>
     </div>
