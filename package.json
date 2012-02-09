@@ -21,7 +21,7 @@
     },
     "scripts": {
         "start": "node ./lib/relaxgtd",
-        "test": "vows --spec --isolate"
+        "test": "node_modules/mocha/bin/mocha --report spec test/server/*.js test/endtoend/*.js"
     },
     "main": "./lib/relaxgtd",
     "repository": {
@@ -42,8 +42,7 @@
     "devDependencies": {
         "sinon": "1.3.x",
         "zombie": "0.12.x",
-        "vows": "0.6.x",
-        "sinon": "1.3.x",
+        "mocha": "0.12.x",
         "chai": "0.2.x"
     },
     "bundleDependencies": [

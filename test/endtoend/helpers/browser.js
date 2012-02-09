@@ -1,8 +1,8 @@
 var Browser = require("zombie");
 var _ = require("underscore");
 
-RelaxBrowser = function (callback) {
-    self = this;
+var RelaxBrowser = function (callback) {
+    var self = this;
     this.zombie = new Browser({
         runScripts: true,
         site: "http://localhost:3005",
