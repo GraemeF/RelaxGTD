@@ -1,5 +1,4 @@
-define(['../../ui/scripts/App', '../../ui/scripts/Service', 'libs/chai'], function (App, Service, chai) {
-    var expect = chai.expect;
+define(['../../ui/scripts/App', '../../ui/scripts/Service'], function (App, Service) {
 
     describe('App', function () {
         var service;
