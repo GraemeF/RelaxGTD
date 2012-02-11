@@ -19,6 +19,16 @@ describe('Task', function () {
         it('displays the new task', function () {
             browser.tasks().should.include('do something');
         });
+
+        describe('I reload the app', function () {
+            beforeEach(function (done) {
+                browser = new helpers.RelaxBrowser(done);
+            });
+
+            it('still displays the new task', function () {
+                browser.tasks().should.include('do something');
+            });
+        });
     });
 
     afterEach(function () {
