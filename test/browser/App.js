@@ -12,26 +12,30 @@ define(['../../ui/scripts/App', '../../ui/scripts/Service'], function (App, Serv
         beforeEach(function () {
             service = new Service("some uri");
             sinon.stub(service, "getTasks");
-            sinon.spy(service, 'addTask');
+            sinon.spy(service, 'send');
 
             app = new App(service);
         });
 
         describe('when a task is added', function () {
+            const taskTitle = "new task";
+
             beforeEach(function () {
                 serviceHasTasks([]);
-                app.newTaskTitle("new task");
+                app.newTaskTitle(taskTitle);
                 app.addTask();
             });
 
             it('adds the task to the tasks', function () {
                 expect(app.tasks()).to.eql([
-                    {title: "new task"}
+                    {title: taskTitle}
                 ]);
             });
 
-            it('sends a task to the server', function () {
-                expect(service.addTask.calledWith("new task")).to.be.true;
+            it('sends a command to add a task to the server', function () {
+                expect(service.send.calledWith(
+                    {name: 'addTask', data: {title: taskTitle}}))
+                    .to.be.true;
             });
         });
 

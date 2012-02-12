@@ -22,13 +22,14 @@ define(['underscore', 'knockout', 'knockout-onDemand'], function (_, ko) {
     };
 
     App.prototype.addTask = function () {
-        var self = this;
         var title = this.newTaskTitle();
         this.pendingTasks.push({title: title});
-        this.service.addTask(title, function (error, data) {
-            if (error !== null)
-                throw error;
-        });
+        this.service.send(
+            {name: 'addTask', data: {title: title}},
+            function (error, data) {
+                if (error !== null)
+                    throw error;
+            });
     };
 
     return App;
