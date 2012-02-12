@@ -6,10 +6,10 @@ require.config({
     }
 });
 
-require(["jquery", "knockout", "App", "CommandService"],
-    function ($, ko, App, CommandService) {
+require(["jquery", "knockout", "App", "CommandClient"],
+    function ($, ko, App, CommandClient) {
         $(function () {
-            var app = new App(new CommandService("/"));
+            var app = new App(new CommandClient("/"));
             ko.applyBindings(app);
         });
     });
