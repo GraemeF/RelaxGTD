@@ -7,12 +7,14 @@ describe("AddTaskHandler", function () {
     var command;
     var handler;
     const title = 'Polish the silver';
+    const id = '1';
 
     beforeEach(function () {
         repo = {store: sinon.spy()};
         command = {
             name: 'addTask',
             data: {
+                id: id,
                 title: title
             }
         };
