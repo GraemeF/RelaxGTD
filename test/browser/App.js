@@ -12,7 +12,7 @@ define(['../../ui/scripts/App', '../../ui/scripts/CommandService'], function (Ap
         beforeEach(function () {
             commandService = new CommandService("some uri");
             sinon.stub(commandService, "getTasks");
-            sinon.spy(commandService, 'send');
+            sinon.stub(commandService, 'send');
 
             app = new App(commandService);
         });

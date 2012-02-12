@@ -7,8 +7,16 @@ define(['jquery'], function ($) {
         callback(null, []);
     };
 
-    CommandService.prototype.send = function (title) {
-
+    CommandService.prototype.send = function (command, callback) {
+        $.ajax({
+            type: "POST",
+            url: this.baseUri + "/commands",
+            data: command,
+            success: function () {
+                callback();
+            },
+            dataType: "json"
+        });
     };
 
     return CommandService;
