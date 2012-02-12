@@ -10,7 +10,7 @@ define(['jquery'], function ($) {
     CommandService.prototype.send = function (command, callback) {
         $.ajax({
             type: "POST",
-            url: this.baseUri + "/commands",
+            url: "/commands",
             data: command,
             success: function () {
                 callback();
