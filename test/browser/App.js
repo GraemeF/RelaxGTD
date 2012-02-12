@@ -1,20 +1,20 @@
-define(['../../ui/scripts/App', '../../ui/scripts/Service'], function (App, Service) {
+define(['../../ui/scripts/App', '../../ui/scripts/CommandService'], function (App, CommandService) {
 
     describe('App', function () {
-        var service;
+        var commandService;
         var app;
 
         var serviceHasTasks = function (tasks) {
-            service.getTasks.callsArgWith(0, null, tasks);
+            commandService.getTasks.callsArgWith(0, null, tasks);
             app.serviceTasks.refresh();
         };
 
         beforeEach(function () {
-            service = new Service("some uri");
-            sinon.stub(service, "getTasks");
-            sinon.spy(service, 'send');
+            commandService = new CommandService("some uri");
+            sinon.stub(commandService, "getTasks");
+            sinon.spy(commandService, 'send');
 
-            app = new App(service);
+            app = new App(commandService);
         });
 
         describe('when a task is added', function () {
@@ -33,7 +33,7 @@ define(['../../ui/scripts/App', '../../ui/scripts/Service'], function (App, Serv
             });
 
             it('sends a command to add a task to the server', function () {
-                expect(service.send.calledWith(
+                expect(commandService.send.calledWith(
                     {name: 'addTask', data: {title: taskTitle}}))
                     .to.be.true;
             });
