@@ -22,7 +22,7 @@ describe('Task', function () {
             browser.tasks().should.include(title);
         });
 
-        describe('I reload the app', function () {
+        /*describe('I reload the app', function () {
             beforeEach(function (done) {
                 browser = new helpers.RelaxBrowser(done);
             });
@@ -30,7 +30,7 @@ describe('Task', function () {
             it('still displays the new task', function () {
                 browser.tasks().should.include(title);
             });
-        });
+        });*/
     });
 
     afterEach(function () {
