@@ -1,0 +1,1 @@
+node_modules/mocha/bin/mocha --report spec test/server/*.js test/endtoend/*.js
