@@ -20,7 +20,7 @@
         "twitterConsumerSecret": "consumer secret"
     },
     "scripts": {
-        "start": "node ./lib/relaxgtd",
+        "start": "node ./lib/server",
         "test": "node_modules/mocha/bin/mocha --report spec test/server/*.js test/endtoend/*.js"
     },
     "main": "./lib/relaxgtd",
