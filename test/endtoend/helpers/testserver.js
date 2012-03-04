@@ -3,12 +3,12 @@ var relax = require('../../../lib/relaxgtd');
 var config = {
     "port":3005,
     "session":{
-        "secret":"testing is fun"
+        "secret":"lksajdfolweujfla"
     },
     "keys":{
         "twitter":{
-            "consumerKey":"process.env.npm_package_config_twitterConsumerKey",
-            "consumerSecret":"process.env.npm_package_config_twitterConsumerSecret"
+            "consumerKey":"WYFmdpXiNAVhTA71PuL2A",
+            "consumerSecret":"ijeVVbCSHiqleliPG4GMuBjoeTrbswvZPrhvSDIhk"
         }
     }
 };
@@ -17,7 +17,6 @@ var Server = function () {
     var self = this;
 
     this.start = function () {
-        config.port = 3005;
         self.relax = new relax(config);
         self.relax.start();
     };
