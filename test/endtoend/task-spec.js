@@ -6,7 +6,6 @@ describe('Task', function () {
     var browser;
 
     beforeEach(function (done) {
-        console.log("beforeEach");
         server = new helpers.Server();
         server.start();
         browser = new helpers.RelaxBrowser(done);
@@ -24,18 +23,17 @@ describe('Task', function () {
         });
 
         describe('I reload the app', function () {
-            beforeEach(function () {
-                //browser = new helpers.RelaxBrowser(done);
+            beforeEach(function (done) {
+                browser = new helpers.RelaxBrowser(done);
             });
 
             it('still displays the new task', function () {
-                //browser.tasks().should.include(title);
+                browser.tasks().should.include(title);
             });
         });
     });
 
     afterEach(function () {
-        console.log("afterEach");
         server.stop();
     });
 });
