@@ -6,9 +6,10 @@ require.config({
     }
 });
 
-require(["jquery", "knockout", "App", "Service"], function ($, ko, App, Service) {
-    $(function () {
-        var app = new App(new Service("/"));
-        ko.applyBindings(app);
+require(["jquery", "knockout", "App", "CommandClient"],
+    function ($, ko, App, CommandClient) {
+        $(function () {
+            var app = new App(new CommandClient("/"));
+            ko.applyBindings(app);
+        });
     });
-});

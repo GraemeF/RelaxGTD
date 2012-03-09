@@ -1,37 +1,41 @@
-define(['../../ui/scripts/App', '../../ui/scripts/Service'], function (App, Service) {
+define(['../../ui/scripts/App', '../../ui/scripts/CommandClient'], function (App, CommandClient) {
 
     describe('App', function () {
-        var service;
+        var commandClient;
         var app;
 
         var serviceHasTasks = function (tasks) {
-            service.getTasks.callsArgWith(0, null, tasks);
+            commandClient.getTasks.callsArgWith(0, null, tasks);
             app.serviceTasks.refresh();
         };
 
         beforeEach(function () {
-            service = new Service("some uri");
-            sinon.stub(service, "getTasks");
-            sinon.spy(service, 'addTask');
+            commandClient = new CommandClient("some uri");
+            sinon.stub(commandClient, "getTasks");
+            sinon.stub(commandClient, 'send');
 
-            app = new App(service);
+            app = new App(commandClient);
         });
 
         describe('when a task is added', function () {
+            const taskTitle = "new task";
+
             beforeEach(function () {
                 serviceHasTasks([]);
-                app.newTaskTitle("new task");
+                app.newTaskTitle(taskTitle);
                 app.addTask();
             });
 
             it('adds the task to the tasks', function () {
                 expect(app.tasks()).to.eql([
-                    {title: "new task"}
+                    {title: taskTitle}
                 ]);
             });
 
-            it('sends a task to the server', function () {
-                expect(service.addTask.calledWith("new task")).to.be.true;
+            it('sends a command to add a task to the server', function () {
+                expect(commandClient.send.calledWith(
+                    {name: 'addTask', data: {title: taskTitle}}))
+                    .to.be.true;
             });
         });
 

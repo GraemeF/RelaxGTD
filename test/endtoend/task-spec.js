@@ -12,13 +12,25 @@ describe('Task', function () {
     });
 
     describe('I add a task', function () {
+        const title = 'do something';
+
         beforeEach(function (done) {
-            browser.createTask('do something', done);
+            browser.createTask(title, done);
         });
 
         it('displays the new task', function () {
-            browser.tasks().should.include('do something');
+            browser.tasks().should.include(title);
         });
+
+/*        describe('I reload the app', function () {
+            beforeEach(function (done) {
+                browser = new helpers.RelaxBrowser(done);
+            });
+
+            it('still displays the new task', function () {
+                browser.tasks().should.include(title);
+            });
+        });*/
     });
 
     afterEach(function () {
