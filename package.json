@@ -21,7 +21,8 @@
     },
     "scripts": {
         "start": "node ./lib/server",
-        "test": "node_modules/mocha/bin/mocha --report spec test/server/*.js test/endtoend/*.js"
+        "test": "node_modules/mocha/bin/mocha --reporter spec test/server/*.js test/endtoend/*.js",
+        "ctest": "node_modules/mocha/bin/mocha --watch test/server/*.js test/endtoend/*.js"
     },
     "main": "./lib/relaxgtd",
     "repository": {

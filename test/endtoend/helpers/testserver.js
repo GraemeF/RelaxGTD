@@ -1,17 +1,6 @@
 var relax = require('../../../lib/relaxgtd');
-
-var config = {
-    "port":3006,
-    "session":{
-        "secret":"lksajdfolweujfla"
-    },
-    "keys":{
-        "twitter":{
-            "consumerKey":"WYFmdpXiNAVhTA71PuL2A",
-            "consumerSecret":"ijeVVbCSHiqleliPG4GMuBjoeTrbswvZPrhvSDIhk"
-        }
-    }
-};
+var config = require('../../../lib/config');
+config.port = 3006;
 
 var Server = function () {
     var self = this;
