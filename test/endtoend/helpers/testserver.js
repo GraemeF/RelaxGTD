@@ -1,7 +1,7 @@
 var relax = require('../../../lib/relaxgtd');
 
 var config = {
-    "port":3005,
+    "port":3006,
     "session":{
         "secret":"lksajdfolweujfla"
     },

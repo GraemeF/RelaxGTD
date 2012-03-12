@@ -5,7 +5,7 @@ var RelaxBrowser = function (callback) {
     var self = this;
     this.zombie = new Browser({
         runScripts: true,
-        site: "http://localhost:3005",
+        site: "http://localhost:3006",
         debug: false,
         userAgent: "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.7 (KHTML, like Gecko) Chrome/16.0.912.59 Safari/535.7"
     });
